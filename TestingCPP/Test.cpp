@@ -1,10 +1,16 @@
-#include<iostream>
+#include <iostream>
 using namespace std;
 
+void func(int i, int& j, int p){
+    i++;
+    j++;
+    p++;
+}
+
 int main(){
-    int n = 15, prod = 1;
-    for(int i=1;i<=n;i++){
-        prod *= i;
-    }
-    cout<<prod<<endl;
+    int i = 10;
+    int j = 6;
+    int &p = i;
+    func(i, j, p);
+    cout << i << " " << j << " " << p;
 }
