@@ -7,7 +7,7 @@ void removeX(char input[])
     {
         return;
     }
-    if (input[0] == 'x')
+    if (input[0] != 'x')
     {
         return removeX(input + 1);
     }
