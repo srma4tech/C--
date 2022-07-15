@@ -11,7 +11,8 @@ int subSeq(string str, string out[])
     }
     string smallStr = str.substr(1);
     int smallOut = subSeq(smallStr, out);
-    for(int i=0;i<smallOut;i++){
+    for (int i = 0; i < smallOut; i++)
+    {
         out[i + smallOut] = str[0] + out[i];
     }
     return 2 * smallOut;
