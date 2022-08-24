@@ -41,13 +41,22 @@ using namespace std;
 //     print(num);
 // }
 
-// int main()
-// {
-//     int i = 0, x = 0;
-//     for (i = 1; i < 10; i *= 2)
-//     {
-//         x++;
-//         cout << x;
-//     }
-//     cout << x;
-// }
+int main()
+{
+    // int i = 0, x = 0;
+    // for (i = 1; i < 10; i *= 2)
+    // {
+    //     x++;
+    //     cout << x;
+    // }
+    // cout << x;
+
+    signed CodingBlocks = 9;
+    long double Nagarro = 8.8;
+    signed char HackerBlocks = 'A';
+    cout<<CodingBlocks<<endl;
+    cout<<Nagarro<<endl;
+    cout<<HackerBlocks<<endl;
+
+}
+
