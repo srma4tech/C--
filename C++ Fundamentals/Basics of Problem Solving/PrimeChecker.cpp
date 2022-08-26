@@ -17,9 +17,6 @@ bool isPrime(int num)
             flag = true;
         }
     }
-    // if(i == num){
-    //     return true;
-    // }
     return flag;
 }
 
