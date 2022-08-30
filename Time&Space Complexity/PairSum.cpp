@@ -3,7 +3,7 @@
 #include<cmath>
 using namespace std;
 
-int intersection(int *arr1, int n, int sum)
+int pairSum(int *arr1, int n, int sum)
 {
     sort(arr1, arr1 + n);
     int count = 0;
@@ -31,7 +31,7 @@ int main()
         cin >> arr1[i];
     }
     cin >> sum;
-    cout << intersection(arr1, N, sum);
+    cout << pairSum(arr1, N, sum);
 
     return 0;
 }
