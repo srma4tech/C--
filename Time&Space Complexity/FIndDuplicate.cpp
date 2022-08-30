@@ -16,6 +16,29 @@ int findDup(int *arr, int n)
     return dup;
 }
 
+// vector<int> duplicates(int arr[], int n)
+// {
+//     vector<int> res;
+//     sort(arr, arr + n);
+//     for (int k = 1; k < n; k++)
+//     {
+//         if (arr[k] == arr[k - 1])
+//             res.push_back(arr[k]);
+//         while (arr[k] == arr[k - 1])
+//         {
+//             k++;
+//         }
+//     }
+//     if (res.size() == 0)
+//     {
+//         return {-1};
+//     }
+//     else
+//     {
+//         return res;
+//     }
+// }
+
 int main()
 {
     int n;
