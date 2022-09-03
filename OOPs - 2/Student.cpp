@@ -22,10 +22,10 @@ public:
     }
 
     // Copy Constructor
-    Student(Student *s)
+    Student(Student &s)
     {
-        this->age = s->age;
-        this->name = new char[strlen(s->name) + 1];
+        this->age = s.age;
+        this->name = new char[strlen(s.name) + 1];
         strcpy(this->name, name);
     }
 
