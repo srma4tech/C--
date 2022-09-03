@@ -22,7 +22,7 @@ public:
     }
 
     // Copy Constructor
-    Student(Student &s)
+    Student(Student const &s)
     {
         this->age = s.age;
         this->name = new char[strlen(s.name) + 1];
