@@ -79,7 +79,7 @@ class Polynomial {
             {
                 newarray[i]=degCoeff[i];
             }
-                                                    //initilizing rest of elements to zero
+//initilizing rest of elements to zero
             for(int j=capacity;j<2*capacity;j++)
             {
                 newarray[j]=0;
