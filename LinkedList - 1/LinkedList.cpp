@@ -4,12 +4,13 @@ using namespace std;
 
 void print(Node *head)
 {
-    while (head->next != NULL)
+    Node *temp = head;
+    while (temp != NULL)
     {
-        cout << head->data << " ";
-        head = head->next;
+        cout << temp->data << " ";
+        temp = temp->next;
     }
-    cout<<head->data;
+    //cout<<head->data;
 }
 
 int main()
