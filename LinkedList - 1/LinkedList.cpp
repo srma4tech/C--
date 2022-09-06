@@ -65,12 +65,19 @@ void printIthNode(Node *head, int i)
     }
 }
 
-void insertNode(Node *head, int i, int data)
+Node * insertNode(Node *head, int i, int data)
 {
     Node *newNode = new Node(data);
     Node *temp = head;
     int count = 0;
-    while (count < i - 1)
+
+    if(i == 0){
+        newNode -> next = head;
+        head = newNode;
+        return head;
+    }
+
+    while (count < i - 1 && temp != NULL)
     {
         temp = temp->next;
         count++;
@@ -81,6 +88,7 @@ void insertNode(Node *head, int i, int data)
         temp->next = newNode;
         newNode->next = a;
     }
+    return head;
 }
 
 int main()
@@ -97,7 +105,7 @@ int main()
     printIthNode(head, pos);
     cout << "Enter element which you want to insert : " << endl;
     cin >> ele;
-    insertNode(head, pos, ele);
+    head = insertNode(head, pos, ele);
     cout << "Updated Linked List is : ";
     print(head);
 
