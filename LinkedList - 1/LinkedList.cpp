@@ -122,6 +122,29 @@ Node* insertNode(Node *head, int i, int data) {
     return head;
 }
 
+//Recursive approach
+Node *deleteNodeRec(Node *head, int pos) {
+	//Write your code here
+    if(head->next == NULL){
+        return NULL;
+    }
+    if(pos==0){
+        Node *temp = head -> next;
+        head->next = NULL;
+        delete head;
+        return temp;
+    }
+    if(pos==1){
+        Node *temp = head->next;
+        head->next = temp->next;
+        temp->next = NULL;
+        delete temp;
+        return head;
+    }
+    Node *curr = deleteNodeRec(head->next,pos-1);
+    return head;
+}
+
 int main()
 {
     Node *head = takeInput();
