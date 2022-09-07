@@ -36,7 +36,7 @@ void print(Node *head)
         temp = temp->next;
     }
 }
-
+//Iterative approach
 int length(Node *head)
 {
     // Write your code here
@@ -48,6 +48,16 @@ int length(Node *head)
         temp = temp->next;
     }
     return count;
+}
+//Recursive function
+int length(Node *head) {
+    Node *temp = head;
+    if(temp == NULL){
+        return 0;
+    }
+    else{
+        return 1 + length(temp->next);
+    }
 }
 
 void printIthNode(Node *head, int i)
