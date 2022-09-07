@@ -74,7 +74,7 @@ void printIthNode(Node *head, int i)
         }
     }
 }
-
+//Iterative approach
 Node * insertNode(Node *head, int i, int data)
 {
     Node *newNode = new Node(data);
@@ -98,6 +98,27 @@ Node * insertNode(Node *head, int i, int data)
         temp->next = newNode;
         newNode->next = a;
     }
+    return head;
+}
+
+//Recursive approach
+Node* insertNode(Node *head, int i, int data) {
+	// Write your code here
+    if(head == NULL){
+        return NULL;
+    }
+    if(i == 0) {
+        Node * temp = new Node(data);
+        temp->next = head;
+        return temp;
+    }
+    if(i==1){
+        Node *temp = new Node(data);
+        temp -> next = head ->next;
+        head->next = temp;
+        return head;
+    }
+    Node* curr=insertNode(head->next,i-1,data);
     return head;
 }
 
