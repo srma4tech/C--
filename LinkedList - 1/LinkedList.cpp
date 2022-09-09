@@ -187,6 +187,56 @@ void printReverse(Node *head)
     cout << head->data << " ";
 }
 
+Node *appendLastNToFirst(Node *head, int n)
+{
+    if(n == 0){
+        return head;
+    }
+    int len = length(head);
+    if(len != n && n <len){
+        int skip = len - n;
+        Node *prev = NULL;
+        Node *curr = head;
+        
+        while(skip > 0){
+            prev = curr;
+            curr = curr->next;
+            skip--;
+        }
+        
+        prev -> next = NULL;
+        Node *tempHead = head;
+        head = curr;
+        
+        while(curr -> next != NULL){
+            curr = curr->next;
+        }
+        curr->next = tempHead;
+    }
+    return head;
+}
+
+Node *removeDuplicates(Node *head)
+{
+    if(head == NULL){
+        return head;
+    }
+	Node *temp = head;            
+	while(temp->next != NULL && temp != NULL){
+		//Duplicate Found
+		if(temp->data == temp->next->data){      
+			//DUplicate Removed
+			temp -> next = temp ->next ->next;    
+		}
+		else{
+			//No Duplicate Present
+			temp = temp->next;               
+		}
+	}
+	//Return Head
+	return head;
+}
+
 int main()
 {
     Node *head = takeInput();
@@ -208,7 +258,8 @@ int main()
     // print(head);
     cout << endl;
     printReverse(head);
-
+    appendLastNToFirst(head, pos);
+    print(head);
     // statically creation
     // Node n1(1);
     // Node *head = &n1;
