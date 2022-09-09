@@ -36,26 +36,29 @@ void print(Node *head)
         temp = temp->next;
     }
 }
-//Iterative approach
+// Iterative approach
+// int length(Node *head)
+// {
+//     // Write your code here
+//     int count = 0;
+//     Node *temp = head;
+//     while (temp != NULL)
+//     {
+//         count++;
+//         temp = temp->next;
+//     }
+//     return count;
+// }
+// Recursive function
 int length(Node *head)
 {
-    // Write your code here
-    int count = 0;
     Node *temp = head;
-    while (temp != NULL)
+    if (temp == NULL)
     {
-        count++;
-        temp = temp->next;
-    }
-    return count;
-}
-//Recursive function
-int length(Node *head) {
-    Node *temp = head;
-    if(temp == NULL){
         return 0;
     }
-    else{
+    else
+    {
         return 1 + length(temp->next);
     }
 }
@@ -74,75 +77,114 @@ void printIthNode(Node *head, int i)
         }
     }
 }
-//Iterative approach
-Node * insertNode(Node *head, int i, int data)
+// Iterative approach
+// Node *insertNode(Node *head, int i, int data)
+// {
+//     Node *newNode = new Node(data);
+//     Node *temp = head;
+//     int count = 0;
+
+//     if (i == 0)
+//     {
+//         newNode->next = head;
+//         head = newNode;
+//         return head;
+//     }
+
+//     while (count < i - 1 && temp != NULL)
+//     {
+//         temp = temp->next;
+//         count++;
+//     }
+//     if (temp != NULL)
+//     {
+//         Node *a = temp->next;
+//         temp->next = newNode;
+//         newNode->next = a;
+//     }
+//     return head;
+// }
+
+// Recursive approach
+Node *insertNode(Node *head, int i, int data)
 {
-    Node *newNode = new Node(data);
-    Node *temp = head;
-    int count = 0;
-
-    if(i == 0){
-        newNode -> next = head;
-        head = newNode;
-        return head;
-    }
-
-    while (count < i - 1 && temp != NULL)
+    // Write your code here
+    if (head == NULL)
     {
-        temp = temp->next;
-        count++;
-    }
-    if (temp != NULL)
-    {
-        Node *a = temp->next;
-        temp->next = newNode;
-        newNode->next = a;
-    }
-    return head;
-}
-
-//Recursive approach
-Node* insertNode(Node *head, int i, int data) {
-	// Write your code here
-    if(head == NULL){
         return NULL;
     }
-    if(i == 0) {
-        Node * temp = new Node(data);
+    if (i == 0)
+    {
+        Node *temp = new Node(data);
         temp->next = head;
         return temp;
     }
-    if(i==1){
+    if (i == 1)
+    {
         Node *temp = new Node(data);
-        temp -> next = head ->next;
+        temp->next = head->next;
         head->next = temp;
         return head;
     }
-    Node* curr=insertNode(head->next,i-1,data);
+    Node *curr = insertNode(head->next, i - 1, data);
     return head;
 }
 
-//Recursive approach
-Node *deleteNodeRec(Node *head, int pos) {
-	//Write your code here
-    if(head->next == NULL){
+// Recursive approach
+Node *deleteNodeRec(Node *head, int pos)
+{
+    // Write your code here
+    if (head->next == NULL)
+    {
         return NULL;
     }
-    if(pos==0){
-        Node *temp = head -> next;
+    if (pos == 0)
+    {
+        Node *temp = head->next;
         head->next = NULL;
         delete head;
         return temp;
     }
-    if(pos==1){
+    if (pos == 1)
+    {
         Node *temp = head->next;
         head->next = temp->next;
         temp->next = NULL;
         delete temp;
         return head;
     }
-    Node *curr = deleteNodeRec(head->next,pos-1);
+    Node *curr = deleteNodeRec(head->next, pos - 1);
     return head;
+}
+// Recursive to find element start
+int helper(Node *head, int n, int index)
+{
+    if (head == NULL)
+    {
+        return -1;
+    }
+    if (head->data == n)
+    {
+        return index;
+    }
+    int shortAns = helper(head->next, n, index + 1);
+    return shortAns;
+}
+
+int findNode(Node *head, int n)
+{
+    return helper(head, n, 0);
+}
+// Recursive to find element end
+
+void printReverse(Node *head)
+{
+    if (head == NULL)
+    {
+        return;
+    }
+    printReverse(head->next);
+    cout << head->data << " ";
 }
 
 int main()
@@ -157,11 +199,15 @@ int main()
     cout << "Length of Linked List is : " << length(head) << endl;
     cout << "Element on " << pos << " Linked List is : ";
     printIthNode(head, pos);
-    cout << "Enter element which you want to insert : " << endl;
+    cout << "\nEnter element which you want to insert : " << endl;
     cin >> ele;
     head = insertNode(head, pos, ele);
     cout << "Updated Linked List is : ";
     print(head);
+    cout << "Element you have added is at index : " << findNode(head, ele);
+    // print(head);
+    cout << endl;
+    printReverse(head);
 
     // statically creation
     // Node n1(1);
