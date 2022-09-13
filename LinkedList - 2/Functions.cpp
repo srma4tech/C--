@@ -155,8 +155,36 @@ Node *mergeSort(Node *head)
     return joinll(head, h2);
 }
 
+Node *reverseLinkedListRec(Node *head)
+{
+    Node *smallAns = NULL;
+    if (head == NULL)
+    {
+        return head;
+    }
+    if (head->next == NULL)
+    {
+        return head;
+    }
+    else
+    {
+        Node *newHead = reverseLinkedListRec(head->next);
+        Node *temp = newHead;
+        while (temp->next != NULL)
+        {
+            temp = temp->next;
+        }
+        // make end NULL
+        temp->next = head;
+        head->next = NULL;
+
+        return newHead;
+    }
+}
+
 int main()
 {
+    Node *rev = NULL;
     cout << "Enter elements : " << endl;
     Node *head = takeInput();
     cout << "Length of list is : " << length(head) << endl;
@@ -165,6 +193,10 @@ int main()
     cout << "\nMid Point of Linked List is : " << midPoint(head)->data << endl;
     cout << "Sorted Linked List is : ";
     mergeSort(head);
+    printNode(head);
+    cout << "\nreverse of linked list is : ";
+    rev = reverseLinkedListRec(head);
+    printNode(rev);
     printNode(head);
     return 0;
 }
