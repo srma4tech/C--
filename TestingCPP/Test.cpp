@@ -1,4 +1,7 @@
 #include <iostream>
+#include<vector>
+#include<set>
+#include<list>
 using namespace std;
 
 // int func(int num){
@@ -41,6 +44,23 @@ using namespace std;
 //     print(num);
 // }
 
+// int example() throw (int) {
+//     throw 5;
+// }
+
+// class abc {
+//     int x;
+//     float y;
+//     public:
+//     abc(int a, float b=5.0){
+//         x = a;
+//         y = b;
+//     }
+//     void print(){
+//         cout<<x <<" "<<y;
+//     }
+// };
+
 int main()
 {
     // int i = 0, x = 0;
@@ -51,12 +71,50 @@ int main()
     // }
     // cout << x;
 
-    signed CodingBlocks = 9;
-    long double Nagarro = 8.8;
-    signed char HackerBlocks = 'A';
-    cout<<CodingBlocks<<endl;
-    cout<<Nagarro<<endl;
-    cout<<HackerBlocks<<endl;
+    // signed CodingBlocks = 9;
+    // long double Nagarro = 8.8;
+    // signed char HackerBlocks = 'A';
+    // cout<<CodingBlocks<<endl;
+    // cout<<Nagarro<<endl;
+    // cout<<HackerBlocks<<endl;
+    // try{
+    //     throw 'S';
+    // }
+    // catch(...){
+    //     cout<<"catch all\n";
+    // }
+    // catch(char a){
+    //     cout<<"character exce caught";
+    // }
+    
+    // vector<int> v = {2,5,3,4,6,3};
+    // set<int> st;
+    // for(auto &i : v){
+    //     st.insert(++i);
+    // }
+    // for(auto i : st){
+    //     cout<< i <<" ";
+    // }
 
+    //example();
+
+    // abc a(2, 3.5);
+    // a.print();
+
+    list<int> l;
+
+    for(int i=1;i<10;++i){
+        l.push_back(i+i);
+    }
+
+    l.resize(5);
+    l.resize(7,20);
+    l.remove(10);
+
+
+    for(list<int>::reverse_iterator i =l.rbegin(); i!= l.rend(); ++i){
+        cout<<*i<<" ";
+    }
+    return 0;
 }
 
