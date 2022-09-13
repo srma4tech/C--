@@ -75,89 +75,84 @@ void printNode(Node *head)
     }
 }
 
-Node* joinll(Node* h1 ,Node* h2)
+Node *joinll(Node *h1, Node *h2)
 {
-    if(h1==NULL)
-  {
-      return h2 ;
-  }
-  
-    if(h2 == NULL)
+    if (h1 == NULL)
     {
-        return h1 ;
+        return h2;
     }
-    
-    Node * head ;
-    Node* tail ;
-    
-    if(h1->data <= h2->data)
-    {
-        head = h1 ;
-        tail = h1 ;
-        h1=h1->next ;
-    }
-    else
-    {
-        head = h2 ;
-        tail = h2 ;
-        h2=h2->next ;
-    
-    }
-    
-    
-    while(h1!=NULL && h2!=NULL)
-    {
-         if(h1->data <= h2->data)
-    {
-    	tail->next = h1 ;
-        tail = h1 ;
-        h1=h1->next ;
-             
-    }
-         else
-    {
-      tail->next = h2 ;
-        tail = h2 ;
-        h2=h2->next ;
-    
-    }
-        
-        
-    }
-    
-    if(h1==NULL)
-    {
-        tail->next = h2 ;
-    }
-    else
-    {
-       tail->next = h1 ; 
-    }
-    
-    return head ;
-}
-Node* mergeSort(Node *head) {
-    
-    if(head==NULL || head->next==NULL)
-    {
-        return head ;
-    }
-    
-    Node* slow = head ;
-    Node*fast = head->next ;
 
-    while(fast!=NULL && fast->next!=NULL)
+    if (h2 == NULL)
     {
-        slow = slow->next ;
-        fast =fast->next->next ;
+        return h1;
     }
-    Node*h2 = slow->next ;
-    slow->next =NULL ;
-    
-   head = mergeSort(head) ;
-   h2 = mergeSort(h2) ; 
-    
-    return joinll(head , h2) ;
+
+    Node *head;
+    Node *tail;
+
+    if (h1->data <= h2->data)
+    {
+        head = h1;
+        tail = h1;
+        h1 = h1->next;
+    }
+    else
+    {
+        head = h2;
+        tail = h2;
+        h2 = h2->next;
+    }
+
+    while (h1 != NULL && h2 != NULL)
+    {
+        if (h1->data <= h2->data)
+        {
+            tail->next = h1;
+            tail = h1;
+            h1 = h1->next;
+        }
+        else
+        {
+            tail->next = h2;
+            tail = h2;
+            h2 = h2->next;
+        }
+    }
+
+    if (h1 == NULL)
+    {
+        tail->next = h2;
+    }
+    else
+    {
+        tail->next = h1;
+    }
+
+    return head;
+}
+Node *mergeSort(Node *head)
+{
+
+    if (head == NULL || head->next == NULL)
+    {
+        return head;
+    }
+
+    Node *slow = head;
+    Node *fast = head->next;
+
+    while (fast != NULL && fast->next != NULL)
+    {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+    Node *h2 = slow->next;
+    slow->next = NULL;
+
+    head = mergeSort(head);
+    h2 = mergeSort(h2);
+
+    return joinll(head, h2);
 }
 
 int main()
@@ -167,8 +162,8 @@ int main()
     cout << "Length of list is : " << length(head) << endl;
     cout << "Linked List is : ";
     printNode(head);
-    cout << "\nMid Point of Linked List is : " << midPoint(head);
-    cout<<"Sorted Linked List is : ";
+    cout << "\nMid Point of Linked List is : " << midPoint(head)->data << endl;
+    cout << "Sorted Linked List is : ";
     mergeSort(head);
     printNode(head);
     return 0;
