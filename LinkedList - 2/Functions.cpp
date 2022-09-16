@@ -182,9 +182,75 @@ Node *reverseLinkedListRec(Node *head)
     }
 }
 
+Node *evenAfterOdd(Node *head)
+{
+    if (head == NULL || head->next == NULL)
+        return head;
+
+    Node *oddh = NULL;
+    Node *evenh = NULL;
+    Node *oddt = NULL;
+    Node *event = NULL;
+
+    while (head != NULL)
+    {
+        // even
+        if (head->data % 2 == 0)
+        {
+            if (evenh == NULL)
+            {
+                evenh = head;
+                event = head;
+                head = head->next;
+            }
+            else
+            {
+                event->next = head;
+                event = head;
+                head = head->next;
+            }
+        }
+        else
+        {
+            // odd
+            if (oddh == NULL)
+            {
+                oddh = head;
+                oddt = head;
+                head = head->next;
+            }
+            else
+            {
+                oddt->next = head;
+                oddt = head;
+                head = head->next;
+            }
+        }
+    }
+    if (event != NULL)
+    {
+        event->next = NULL;
+    }
+    else
+    {
+        oddt->next = NULL;
+        return oddh;
+    }
+    if (oddt != NULL)
+    {
+        oddt->next = evenh;
+        return oddh;
+    }
+    else
+    {
+        return evenh;
+    }
+}
+
 int main()
 {
     Node *rev = NULL;
+    Node *varEvenAfterOdd = NULL;
     cout << "Enter elements : " << endl;
     Node *head = takeInput();
     cout << "Length of list is : " << length(head) << endl;
@@ -197,6 +263,7 @@ int main()
     cout << "\nreverse of linked list is : ";
     rev = reverseLinkedListRec(head);
     printNode(rev);
-    printNode(head);
+    varEvenAfterOdd = evenAfterOdd(head);
+    printNode(varEvenAfterOdd);
     return 0;
 }
