@@ -2,16 +2,16 @@
 #include <iostream>
 using namespace std;
 
-class StackUsingArray
+class StackUsingDynArray
 {
     int *data;
     int nextIndex;
     int capacity;
 
 public:
-    StackUsingArray()
+    StackUsingDynArray()
     {
-        data = new int[];
+        data = new int[4];
         nextIndex = 0;
         capacity = 4;
     }
@@ -33,6 +33,12 @@ public:
         if (nextIndex == capacity)
         {
             int *newData = new int[2 * capacity];
+            for(int i=0;i<capacity;i++){
+                newData[i] = data[i];
+            }
+            capacity *= 2;
+            delete [] data;
+            data = newData;
         }
         data[nextIndex] = element;
         nextIndex++;
@@ -64,7 +70,7 @@ public:
 };
 
 int main() {
-    StackUsingArray s(5);
+    StackUsingDynArray s;
     s.push(10);
     s.push(20);
     s.push(30);
