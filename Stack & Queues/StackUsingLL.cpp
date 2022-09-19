@@ -50,9 +50,10 @@ public:
             return 0;
         }
         T ans = head->data;
-        Node<T> *temp = head;
-        head = head->next;
-        delete head;
+        Node<T> *temp = head->next;
+        head->next = NULL;
+        head = temp;
+        //delete head;
         size--;
         return ans;
     }
