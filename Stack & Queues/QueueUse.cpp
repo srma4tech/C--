@@ -1,11 +1,12 @@
-#include "QueueUsingArr.h"
+// #include "QueueUsingArr.h"
+#include "QueueUsingLL.h"
 #include <iostream>
 
 using namespace std;
 
 int main()
 {
-    QueueUsingArr<int> que(5);
+    QueueUsingLL<int> que;
 
     que.enqueue(10);
     que.enqueue(20);
