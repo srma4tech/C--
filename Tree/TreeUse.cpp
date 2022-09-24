@@ -4,7 +4,7 @@
 #include <iostream>
 using namespace std;
 
-//Print tree recursively
+// Print tree recursively
 void printTree(TreeNode<int> *root)
 {
     if (root == NULL)
@@ -23,7 +23,7 @@ void printTree(TreeNode<int> *root)
     }
 }
 
-//Count Node of Tree
+// Count Node of Tree
 int countNode(TreeNode<int> *root)
 {
     int ans = 1;
@@ -146,7 +146,7 @@ void printLevelWise(TreeNode<int> *root)
 }
 
 // Levelwise take input
-TreeNode<int> *takeInput()
+TreeNode<int> *takeInputLevelWise()
 {
     int rootData;
     cout << "Enter root data : " << endl;
@@ -178,21 +178,22 @@ TreeNode<int> *takeInput()
 }
 
 // Recursive
-
-// TreeNode<int> *takeInput() {
-//     int rootData;
-//     cout<<"Enter data : "<<endl;
-//     cin>>rootData;
-//     TreeNode<int> *root = new TreeNode<int>(rootData);
-//     int n;
-//     cout<<"Enter numnber of children : " << rootData <<endl;
-//     cin>>n;
-//     for(int i=0;i<n;i++){
-//         TreeNode<int>* child = takeInput();
-//         root ->children.push_back(child);
-//     }
-//     return root;
-// }
+TreeNode<int> *takeInput()
+{
+    int rootData;
+    cout << "Enter data : " << endl;
+    cin >> rootData;
+    TreeNode<int> *root = new TreeNode<int>(rootData);
+    int n;
+    cout << "Enter numnber of children : " << rootData << endl;
+    cin >> n;
+    for (int i = 0; i < n; i++)
+    {
+        TreeNode<int> *child = takeInput();
+        root->children.push_back(child);
+    }
+    return root;
+}
 
 int main()
 {
@@ -202,7 +203,7 @@ int main()
 
     // root->children.push_back(node1);
     // root->children.push_back(node2);
-    TreeNode<int> *root = takeInput();
+    TreeNode<int> *root = takeInputLevelWise();
     cout << "Total Node is: " << countNode(root) << endl;
     cout << "Our Tree is as : " << endl;
     printLevelWise(root);
