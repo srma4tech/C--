@@ -4,24 +4,26 @@
 #include <iostream>
 using namespace std;
 
-// void printTree(TreeNode<int> *root)
-// {
-//     if (root == NULL)
-//     {
-//         return;
-//     }
-//     cout << root->data << ":";
-//     for (int i = 0; i < root->children.size(); i++)
-//     {
-//         cout << root->children[i]->data << ",";
-//     }
-//     cout << endl;
-//     for (int i = 0; i < root->children.size(); i++)
-//     {
-//         printTree(root->children[i]);
-//     }
-// }
+//Print tree recursively
+void printTree(TreeNode<int> *root)
+{
+    if (root == NULL)
+    {
+        return;
+    }
+    cout << root->data << ":";
+    for (int i = 0; i < root->children.size(); i++)
+    {
+        cout << root->children[i]->data << ",";
+    }
+    cout << endl;
+    for (int i = 0; i < root->children.size(); i++)
+    {
+        printTree(root->children[i]);
+    }
+}
 
+//Count Node of Tree
 int countNode(TreeNode<int> *root)
 {
     int ans = 1;
@@ -32,6 +34,7 @@ int countNode(TreeNode<int> *root)
     return ans;
 }
 
+// Print the sum of nodes of Tree
 int sumOfNodes(TreeNode<int> *root)
 {
     int ans = root->data;
@@ -42,6 +45,7 @@ int sumOfNodes(TreeNode<int> *root)
     return ans;
 }
 
+// Find maximum data node of tree
 TreeNode<int> *maxDataNode(TreeNode<int> *root)
 {
     if (root == NULL)
@@ -61,6 +65,7 @@ TreeNode<int> *maxDataNode(TreeNode<int> *root)
     return max;
 }
 
+// Find height of the tree
 int getHeight(TreeNode<int> *root)
 {
     if (root == NULL)
@@ -75,6 +80,7 @@ int getHeight(TreeNode<int> *root)
     return height;
 }
 
+// Print Nodes of Level K
 void printAtLevelK(TreeNode<int> *root, int k)
 {
     if (root == NULL)
@@ -92,6 +98,7 @@ void printAtLevelK(TreeNode<int> *root, int k)
     }
 }
 
+// Count the Leaf Node
 int getLeafNodeCount(TreeNode<int> *root)
 {
     if (root == NULL)
@@ -110,6 +117,7 @@ int getLeafNodeCount(TreeNode<int> *root)
     return ans;
 }
 
+// Print Level wise Node
 void printLevelWise(TreeNode<int> *root)
 {
     queue<TreeNode<int> *> que;
