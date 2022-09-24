@@ -32,6 +32,64 @@ int countNode(TreeNode<int> *root)
     return ans;
 }
 
+int sumOfNodes(TreeNode<int> *root)
+{
+    int ans = root->data;
+    for (int i = 0; i < root->children.size(); i++)
+    {
+        ans += sumOfNodes(root->children[i]);
+    }
+    return ans;
+}
+
+TreeNode<int> *maxDataNode(TreeNode<int> *root)
+{
+    if (root == NULL)
+    {
+        return NULL;
+    }
+    TreeNode<int> *max = root;
+
+    for (int i = 0; i < root->children.size(); i++)
+    {
+        TreeNode<int> *desc = maxDataNode(root->children[i]);
+        if (max->data < desc->data)
+        {
+            max = desc;
+        }
+    }
+    return max;
+}
+
+int getHeight(TreeNode<int> *root)
+{
+    if (root == NULL)
+    {
+        return 0;
+    }
+    int height = 1;
+    for (int i = 0; i < root->children.size(); i++)
+    {
+        height = max(height, 1 + getHeight(root->children[i]));
+    }
+    return height;
+}
+
+void printAtLevelK(TreeNode<int> *root, int k)
+{
+    if(root == NULL){
+        return;
+    }
+    if (k == 0)
+    {
+        cout << root->data << endl;
+        return;
+    }
+    for(int i=0;i<root->children.size();i++){
+        printAtLevelK(root->children[i], k-1);
+    }
+}
+
 void printLevelWise(TreeNode<int> *root)
 {
     queue<TreeNode<int> *> que;
