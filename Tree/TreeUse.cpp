@@ -195,6 +195,28 @@ TreeNode<int> *takeInput()
     return root;
 }
 
+void preOrderPrint(TreeNode<int> *root)
+{
+    if (root == NULL)
+    {
+        return;
+    }
+    cout << root->data << " ";
+    for (int i = 0; i < root->children.size(); i++)
+    {
+        preOrderPrint(root->children[i]);
+    }
+}
+
+void deleteTree(TreeNode<int> *root)
+{
+    for (int i = 0; i < root->children.size(); i++)
+    {
+        deleteTree(root->children[i]);
+    }
+    delete root;
+}
+
 int main()
 {
     // TreeNode<int> *root = new TreeNode<int>(1);
@@ -206,6 +228,9 @@ int main()
     TreeNode<int> *root = takeInputLevelWise();
     cout << "Total Node is: " << countNode(root) << endl;
     cout << "Our Tree is as : " << endl;
+    printLevelWise(root);
+    preOrderPrint(root);
+    deleteTree(root);
     printLevelWise(root);
     // printTree(root);
 }
