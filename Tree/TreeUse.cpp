@@ -195,7 +195,7 @@ TreeNode<int> *takeInput()
     return root;
 }
 
-//Pre Order Print of Tree
+// Pre Order Print of Tree
 void preOrderPrint(TreeNode<int> *root)
 {
     if (root == NULL)
@@ -209,7 +209,7 @@ void preOrderPrint(TreeNode<int> *root)
     }
 }
 
-//Post Order Print of Tree
+// Post Order Print of Tree
 void postOrderPrint(TreeNode<int> *root)
 {
     if (root == NULL)
@@ -223,7 +223,7 @@ void postOrderPrint(TreeNode<int> *root)
     cout << root->data << " ";
 }
 
-//containsX function Assignment
+// containsX function Assignment
 bool isPresent(TreeNode<int> *root, int x)
 {
     if (root == NULL)
@@ -244,7 +244,7 @@ bool isPresent(TreeNode<int> *root, int x)
     return false;
 }
 
-//delete the tree
+// delete the tree
 void deleteTree(TreeNode<int> *root)
 {
     for (int i = 0; i < root->children.size(); i++)
@@ -253,6 +253,90 @@ void deleteTree(TreeNode<int> *root)
     }
     delete root;
 }
+
+// Get Large Node count greater ten X
+int getLargeNodeCount(TreeNode<int> *root, int x)
+{
+
+    if (root == NULL)
+    {
+        return 0;
+    }
+    int count = 0;
+    if (root->data > x)
+    {
+        count++;
+    }
+    for (int i = 0; i < root->children.size(); i++)
+    {
+        count += getLargeNodeCount(root->children[i], x);
+    }
+    return count;
+}
+
+// Max SumNode childs
+int sumNode(TreeNode<int> *root)
+{
+    /* Called by maxSumNode */
+    if (root == NULL)
+        return 0;
+    int sum = root->data; // Calculate sumNode for root Node
+    int childCount = root->children.size();
+    for (int i = 0; i < childCount; i++)
+        sum += root->children[i]->data;
+    return sum;
+}
+TreeNode<int> *maxSumNode(TreeNode<int> *root)
+{
+    if (root == NULL)
+    {
+        return NULL;
+    }
+    TreeNode<int> *res = root;
+    int maxSum = sumNode(root);
+
+    for (int i = 0; i < root->children.size(); i++)
+    {
+        TreeNode<int> *temp = maxSumNode(root->children[i]);
+        int sum = sumNode(temp);
+        if (sum > maxSum)
+        {
+            maxSum = sum;
+            res = temp;
+        }
+    }
+    return res;
+}
+
+// Are two tree identical
+bool areIdentical(TreeNode<int> *root1, TreeNode<int> *root2)
+{
+    if (root1 == NULL)
+    {
+        if (root2 == NULL)
+            return true;
+        else
+            return false;
+    }
+    if (root1->data != root2->data)
+    {
+        return false;
+    }
+    if (root1->children.size() != root2->children.size())
+    {
+        return false;
+    }
+    for (int i = 0; i < root1->children.size(); i++)
+    {
+        if (!areIdentical(root1->children[i], root2->children[i]))
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
+
 
 int main()
 {
