@@ -195,6 +195,7 @@ TreeNode<int> *takeInput()
     return root;
 }
 
+//Pre Order Print of Tree
 void preOrderPrint(TreeNode<int> *root)
 {
     if (root == NULL)
@@ -208,6 +209,42 @@ void preOrderPrint(TreeNode<int> *root)
     }
 }
 
+//Post Order Print of Tree
+void postOrderPrint(TreeNode<int> *root)
+{
+    if (root == NULL)
+    {
+        return;
+    }
+    for (int i = 0; i < root->children.size(); i++)
+    {
+        postOrderPrint(root->children[i]);
+    }
+    cout << root->data << " ";
+}
+
+//containsX function Assignment
+bool isPresent(TreeNode<int> *root, int x)
+{
+    if (root == NULL)
+    {
+        return false;
+    }
+    if (root->data == x)
+    {
+        return true;
+    }
+    for (int i = 0; i < root->children.size(); i++)
+    {
+        if (isPresent(root->children[i], x))
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+//delete the tree
 void deleteTree(TreeNode<int> *root)
 {
     for (int i = 0; i < root->children.size(); i++)
@@ -229,6 +266,7 @@ int main()
     cout << "Total Node is: " << countNode(root) << endl;
     cout << "Our Tree is as : " << endl;
     printLevelWise(root);
+    preOrderPrint(root);
     preOrderPrint(root);
     deleteTree(root);
     printLevelWise(root);
