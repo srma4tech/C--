@@ -336,6 +336,40 @@ bool areIdentical(TreeNode<int> *root1, TreeNode<int> *root2)
     return true;
 }
 
+// Next Larger Element in Tree
+TreeNode<int> *getNextLargerElement(TreeNode<int> *root, int x)
+{
+    if (root == NULL)
+    {
+        return root;
+    }
+
+    int childs = root->children.size();
+
+    if (childs == 0)
+    {
+        if (root->data > x)
+        {
+            return root;
+        }
+        return NULL;
+    }
+
+    TreeNode<int> *res = NULL;
+    if (root->data > x)
+    {
+        res = root;
+    }
+    for (int i = 0; i < childs; i++)
+    {
+        TreeNode<int> *temp = getNextLargerElement(root->children[i], x);
+        if (temp == NULL)
+            continue;
+        if (res == NULL || res->data > temp->data)
+            res = temp;
+    }
+    return res;
+}
 
 
 int main()
