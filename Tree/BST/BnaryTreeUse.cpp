@@ -80,8 +80,31 @@ BinaryTreeNode<int> *takeLevelwiseInput()
     return root;
 }
 
-void printLevelWise(BinaryTreeNode<int>* root){
-    
+void printLevelWise(BinaryTreeNode<int> *root)
+{
+    if (root == NULL)
+    {
+        return;
+    }
+    queue<BinaryTreeNode<int> *> que;
+    que.push(root);
+    while (!que.empty())
+    {
+        BinaryTreeNode<int> *curr = que.front();
+        que.pop();
+        int currData = curr->data, left = -1, right = -1;
+        if (curr->left != NULL)
+        {
+            left = curr->left->data;
+            que.push(curr->left);
+        }
+        if (curr->right != NULL)
+        {
+            right = curr->right->data;
+            que.push(curr->right);
+        }
+        cout << currData << ":L:" << left << ",R:" << right << endl;
+    }
 }
 
 int main()
