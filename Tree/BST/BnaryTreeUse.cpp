@@ -107,6 +107,121 @@ void printLevelWise(BinaryTreeNode<int> *root)
     }
 }
 
+int countNode(BinaryTreeNode<int> *root)
+{
+    if (root == NULL)
+    {
+        return 0;
+    }
+    return 1 + countNode(root->left) + countNode(root->right);
+}
+
+bool isNodePresent(BinaryTreeNode<int> *root, int x)
+{
+    if (root == NULL)
+    {
+        return 0;
+    }
+    if (root->data == x)
+    {
+        return true;
+    }
+    if (isNodePresent(root->left, x))
+        return true;
+    if (isNodePresent(root->right, x))
+        return true;
+    return false;
+}
+
+int height(BinaryTreeNode<int> *root)
+{
+    if (root == NULL)
+    {
+        return 0;
+    }
+    return 1 + max(height(root->left), height(root->right));
+}
+
+void mirrorBinaryTree(BinaryTreeNode<int> *root)
+{
+    if (root == NULL)
+    {
+        return;
+    }
+    BinaryTreeNode<int> *left = root->left;
+    root->left = root->right;
+    root->right = left;
+    mirrorBinaryTree(root->right);
+    mirrorBinaryTree(root->left);
+}
+
+void inOrder(BinaryTreeNode<int> *root)
+{
+    if (root == NULL)
+    {
+        return;
+    }
+    inOrder(root->left);
+    cout << root->data << " ";
+    inOrder(root->right);
+}
+
+void preOrder(BinaryTreeNode<int> *root)
+{
+    if (root == NULL)
+    {
+        return;
+    }
+    cout << root->data << " ";
+    preOrder(root->left);
+    preOrder(root->right);
+}
+
+void postOrder(BinaryTreeNode<int> *root)
+{
+    if (root == NULL)
+    {
+        return;
+    }
+    postOrder(root->left);
+    postOrder(root->right);
+    cout << root->data << " ";
+}
+
+BinaryTreeNode<int> *buildTree(int *preorder, int preLength, int *inorder, int inLength)
+{
+    if (preLength != inLength || preorder == NULL || inorder == NULL || preLength == 0)
+    {
+        return NULL;
+    }
+    int rootIndex = preorder[0], leftCount, rightCount;
+    for (leftCount = 0; leftCount < inLength && inorder[leftCount] != rootIndex; leftCount++)
+        ;
+    rightCount = preLength - leftCount - 1;
+    BinaryTreeNode<int> *root = new BinaryTreeNode<int>(rootIndex);
+    root->left = buildTree(preorder + 1, leftCount, inorder, leftCount);
+    root->right = buildTree(preorder + leftCount + 1, rightCount, inorder + leftCount + 1, rightCount);
+    return root;
+}
+
+BinaryTreeNode<int> *buildTreePostIn(int *postorder, int postLength, int *inorder, int inLength)
+{
+    if (postLength != inLength || postorder == NULL || inorder == NULL || postLength == 0)
+        return NULL;
+    int rootVal = postorder[postLength - 1], leftCount, rightCount;
+    // Search for rootVal in inorder
+    for (leftCount = 0; leftCount < inLength && inorder[leftCount] != rootVal; leftCount++)
+        ;
+    // leftCount is no of nodes of left tree
+    rightCount = postLength - leftCount - 1;
+    BinaryTreeNode<int> *root = new BinaryTreeNode<int>(rootVal);
+    root->left = buildTreePostIn(postorder, leftCount, inorder, leftCount);
+    root->right = buildTreePostIn(postorder + leftCount, rightCount, inorder + leftCount + 1, rightCount);
+    return root;
+}
+
+
+
 int main()
 {
     // BinaryTreeNode<int> *root = new BinaryTreeNode<int>(1);
@@ -114,8 +229,15 @@ int main()
     // BinaryTreeNode<int> *node2 = new BinaryTreeNode<int>(3);
     // root -> left = node1;
     // root -> right = node2;
+
+    // 1 2 3 4 5 6 7 -1 -1 -1 -1 8 9 -1 -1 -1 -1 -1 -1
+
     BinaryTreeNode<int> *root = takeLevelwiseInput();
     printTree(root);
+    cout << "\nTotal Nodes : " << countNode(root) << endl;
+    inOrder(root);
+
+    // printTree(root);
     delete root;
     return 0;
 }
