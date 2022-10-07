@@ -319,7 +319,40 @@ bool isBalanced(BinaryTreeNode<int> *root)
     return true;
 }
 
+void printLevelWiseAssignment(BinaryTreeNode<int> *root)
+{
+    if (root == NULL)
+        return;
 
+    queue<BinaryTreeNode<int> *> q;
+    BinaryTreeNode<int> *curr;
+
+    q.push(root);
+    q.push(NULL);
+
+    while (q.size() > 1)
+    {
+        curr = q.front();
+        q.pop();
+
+        if (curr == NULL)
+        {
+            q.push(NULL);
+            cout << "\n";
+        }
+
+        else
+        {
+            if (curr->left)
+                q.push(curr->left);
+
+            if (curr->right)
+                q.push(curr->right);
+
+            cout << curr->data << " ";
+        }
+    }
+}
 
 int main()
 {
