@@ -220,6 +220,105 @@ BinaryTreeNode<int> *buildTreePostIn(int *postorder, int postLength, int *inorde
     return root;
 }
 
+int findMax(BinaryTreeNode<int> *root)
+{
+    // Base case
+    if (root == NULL)
+        return INT_MIN;
+
+    int res = root->data;
+    int lres = findMax(root->left);
+    int rres = findMax(root->right);
+    if (lres > res)
+        res = lres;
+    if (rres > res)
+        res = rres;
+    return res;
+}
+
+int findMin(BinaryTreeNode<int> *root)
+{
+    // code
+    if (root == NULL)
+    {
+        return INT_MAX;
+    }
+    int res = root->data;
+    int left = findMin(root->left);
+    int right = findMin(root->right);
+    if (left < res)
+    {
+        res = left;
+    }
+    if (right < res)
+    {
+        res = right;
+    }
+    return res;
+}
+
+pair<int, int> getMinAndMax(BinaryTreeNode<int> *root)
+{
+    pair<int, int> p;
+    if (root == NULL)
+    {
+        p.first = 0;
+        p.second = 0;
+        return p;
+    }
+    p.first = findMin(root);
+    p.second = findMax(root);
+    return p;
+}
+
+int getSum(BinaryTreeNode<int> *root)
+{
+    if (root == NULL)
+        return 0;
+    int res = root->data;
+    res += getSum(root->left);
+    res += getSum(root->right);
+    return res;
+}
+
+int depth(BinaryTreeNode<int> *root)
+{
+    if (root == nullptr)
+        return 0;
+    int left = depth(root->left);
+    int right = depth(root->right);
+    return max(left, right) + 1;
+}
+
+int depthDiff(BinaryTreeNode<int> *root)
+{
+    if (root == NULL)
+        return 0;
+    int left = depth(root->left);
+    int right = depth(root->right);
+    int diff = left - right;
+    if (diff < 0)
+        diff *= -1;
+    int max = (left > right ? left : right);
+    return max + 1;
+}
+
+bool isBalanced(BinaryTreeNode<int> *root)
+{
+    if (root == NULL)
+        return true;
+    int left = depth(root->left);
+    int right = depth(root->right);
+    int diff = abs(left - right);
+    if (diff > 1)
+        return false;
+    if (!isBalanced(root->left))
+        return false;
+    if (!isBalanced(root->right))
+        return false;
+    return true;
+}
+
 
 
 int main()
