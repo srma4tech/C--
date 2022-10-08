@@ -25,3 +25,25 @@ void reverseQueue(queue<int> &input) {
     input.push(data);
 }
 
+#include<stack>
+#include<vector>
+int* stockSpan(int *price, int size)  {
+	// Write your code here
+    int *si=new int[size];
+    
+    stack<int> s;
+    si[0]=1;
+    s.push(0);
+    for(int i=1;i<size;i++){
+        
+            while(!s.empty() && price[s.top()]<price[i]){
+                s.pop();
+            }
+        if(s.empty())
+            si[i]=i+1;
+        else
+            si[i]=i-s.top();
+        s.push(i);
+    }
+    return si;
+}
