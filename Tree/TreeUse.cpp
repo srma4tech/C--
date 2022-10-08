@@ -371,8 +371,52 @@ TreeNode<int> *getNextLargerElement(TreeNode<int> *root, int x)
     return res;
 }
 
-//Second  Largest Tree
+// Second  Largest Tree
+TreeNode<int> *getSecondLargestNode(TreeNode<int> *root)
+{
+    if (root == NULL)
+        return NULL;
+    int childCount = root->children.size();
+    if (childCount == 0)
+        return NULL;
 
+    TreeNode<int> *largest = root, *secLargest = root->children[0];
+    if (largest->data < secLargest->data)
+    {
+        secLargest = root;
+        largest = root->children[0];
+    }
+    queue<TreeNode<int> *> q;
+    q.push(root);
+    while (!q.empty())
+    {
+        TreeNode<int> *curr = q.front();
+        q.pop();
+        childCount = curr->children.size();
+        for (int i = 0; i < childCount; i++)
+        {
+            q.push(curr->children[i]);
+            if (curr->children[i]->data > secLargest->data)
+            {
+                if (curr->children[i]->data > largest->data)
+                {
+                    secLargest = largest;
+                    largest = curr->children[i];
+                }
+                else
+                {
+                    secLargest = curr->children[i];
+                }
+            }
+        }
+    }
+    if (largest->data == secLargest->data)
+    {
+        return NULL;
+    }
+    else
+        return secLargest;
+}
 
 int main()
 {
