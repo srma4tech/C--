@@ -354,6 +354,72 @@ void printLevelWiseAssignment(BinaryTreeNode<int> *root)
     }
 }
 
+BinaryTreeNode<int> *removeLeafNodes(BinaryTreeNode<int> *root)
+{
+    if (root == NULL)
+        return NULL;
+    if (root->left == NULL && root->right == NULL)
+    {
+        delete root;
+        return NULL;
+    }
+    root->left = removeLeafNodes(root->left);
+    root->right = removeLeafNodes(root->right);
+    return root;
+}
+
+vector<Node<int> *> constructLinkedListForEachLevel(BinaryTreeNode<int> *root)
+{
+    if (root == NULL)
+    {
+        vector<Node<int> *> v;
+        return v;
+    }
+    queue<BinaryTreeNode<int> *> q;
+    vector<Node<int> *> vec;
+    q.push(root);
+    int no = 1;
+    while (!q.empty())
+    {
+        int children = 0;
+
+        vec.push_back(NULL);
+        while (no)
+        {
+            BinaryTreeNode<int> *temp = q.front();
+            q.pop();
+            // something
+            if (vec[vec.size() - 1] == NULL)
+            {
+                Node<int> *newNode = new Node<int>(temp->data);
+                vec[vec.size() - 1] = newNode;
+            }
+            else
+            {
+                Node<int> *head = vec[vec.size() - 1];
+                Node<int> *newNode = new Node<int>(temp->data);
+                newNode->next = head;
+                vec[vec.size() - 1] = newNode;
+            }
+            if (temp->right)
+            {
+                q.push(temp->right);
+                children++;
+            }
+            if (temp->left)
+            {
+                q.push(temp->left);
+                children++;
+            }
+            no--;
+        }
+        no = children;
+    }
+    return vec;
+}
+
+
+
 int main()
 {
     // BinaryTreeNode<int> *root = new BinaryTreeNode<int>(1);
