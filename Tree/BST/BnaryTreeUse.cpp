@@ -418,7 +418,60 @@ vector<Node<int> *> constructLinkedListForEachLevel(BinaryTreeNode<int> *root)
     return vec;
 }
 
+void zigZagOrder(BinaryTreeNode<int> *root)
+{
+    if (root == NULL)
+    {
+        return;
+    }
+    stack<BinaryTreeNode<int> *> s1;
+    stack<BinaryTreeNode<int> *> s2;
+    s1.push(root);
 
+    int flag = 0;
+    while (!s1.empty() || !s2.empty())
+    {
+        if (flag == 0)
+        {
+            while (!s1.empty())
+            {
+                BinaryTreeNode<int> *temp = s1.top();
+                s1.pop();
+                cout << temp->data << " ";
+                if (temp->left)
+                {
+                    s2.push(temp->left);
+                }
+                if (temp->right)
+                {
+                    s2.push(temp->right);
+                }
+            }
+            flag = 1;
+        }
+
+        else if (flag == 1)
+        {
+            while (!s2.empty())
+            {
+                BinaryTreeNode<int> *temp1 = s2.top();
+                s2.pop();
+                cout << temp1->data << " ";
+                if (temp1->right)
+                {
+                    s1.push(temp1->right);
+                }
+                if (temp1->left)
+                {
+                    s1.push(temp1->left);
+                }
+            }
+            flag = 0;
+        }
+
+        cout << endl;
+    }
+}
 
 int main()
 {
